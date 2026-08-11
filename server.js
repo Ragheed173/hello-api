@@ -18,16 +18,14 @@ const pool = new Pool({
 
 app.get("/", (req, res) => {
   res.json({
-    message: "Ragheed Backend Server",
+    message: "Deployment from Windows successful",
     status: "running",
   });
 });
 
 app.get("/api/users", async (req, res) => {
   try {
-    const result = await pool.query(
-      "SELECT * FROM users ORDER BY id ASC"
-    );
+    const result = await pool.query("SELECT * FROM users ORDER BY id ASC");
 
     res.json(result.rows);
   } catch (error) {
@@ -55,7 +53,7 @@ app.post("/api/users", async (req, res) => {
       VALUES ($1, $2)
       RETURNING *
       `,
-      [name, email]
+      [name, email],
     );
 
     res.status(201).json(result.rows[0]);
